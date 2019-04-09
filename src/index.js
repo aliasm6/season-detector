@@ -22,6 +22,14 @@ class App extends React.Component {
       }
     );
   }
+
+  componentDidMount() {
+    console.log('Component rendered to the screen!');
+  }
+
+  componentDidUpdate() {
+    console.log('Component was updated!');
+  }
   //React requires that render be defined!!!
   //Conditional rendering
   render () {
