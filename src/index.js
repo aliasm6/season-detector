@@ -9,16 +9,20 @@ class App extends React.Component {
   constructor(props) {
     //this ensures that React.Component's constructor function is called upon when the App class is created. Otherwise the App class will overwrite the class that it extends upon's constructor. Super is reference to parent's constructor function.
     super(props);
-    
+
     this.state = { lat: null };
+
+    window.navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({ lat: position.coords.latitude })
+      },
+      err => console.log(err)
+    );
   }
   //React requires that render be defined!!!
   render () {
-    window.navigator.geolocation.getCurrentPosition(
-      position => console.log(position),
-      err => console.log(err)
-    );
-    return <div> Latitude: </div>;
+
+    return <div> Latitude: {this.state.lat} </div>;
   }
 }
 
