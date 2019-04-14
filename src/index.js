@@ -12,19 +12,16 @@ class App extends React.Component {
     //ONLY place where setState function isn't needed.
     this.state = { lat: null, errorMessage: '' };
 
-    window.navigator.geolocation.getCurrentPosition(
-      position => {
-        //Used setState function to reasign state!!!!!!
-        this.setState({ lat: position.coords.latitude })
-      },
-      err => {
-        this.setState({ errorMessage: err.message})
-      }
-    );
+
   }
 
   componentDidMount() {
-    console.log('Component rendered to the screen!');
+    window.navigator.geolocation.getCurrentPosition(
+      position => this.setState({ lat: position.coords.latitude })
+      ,
+      err => this.setState({ errorMessage: err.message})
+
+    );
   }
 
   componentDidUpdate() {
