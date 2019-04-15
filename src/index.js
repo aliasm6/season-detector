@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
 import Spinner from './Spinner';
-class App extends React.Component {
 
+class App extends React.Component {
   // same as using constructor method
   state = { lat: null, errorMessage: '' };
 
@@ -19,9 +19,8 @@ class App extends React.Component {
   componentDidUpdate() {
     console.log('Component was updated!');
   }
-  //React requires that render be defined!!!
-  //Conditional rendering
-  render () {
+  //helper method to avoid using conditionals within render
+  renderContent() {
     if(this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.ErrorMessage}</div>
     }
@@ -29,7 +28,12 @@ class App extends React.Component {
       return <SeasonDisplay lat={this.state.lat} />
     }
 
-    return <Spinner />;
+    return <Spinner message="Please accept location request." />;
+  }
+  //React requires that render be defined!!!
+  //Avoid conditional rendering
+  render () {
+    return <div>{this.renderContent()}</div>;
   }
 }
 
